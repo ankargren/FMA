@@ -4,7 +4,7 @@ Generate.S <- cmpfun(function(Fix.X, Fix.Z, Potential.X, Potential.Z) {
   n.potential <- length(c(Potential.X, Potential.Z))
   n.X <- length(c(Fix.X, Potential.X))
   n.Z <- length(c(Fix.Z, Potential.Z))
-  s <- matrix(NaN, nr = n.submodels, nc = n.variables)
+  s <- matrix(NaN, nrow = n.submodels, ncol = n.variables)
   s[, c(Fix.X, n.X+Fix.Z)] <- 1
   s[, c(Potential.X, n.X+Potential.Z)] <- as.matrix(expand.grid(rep(list(c(0,1)), n.potential)))
   s
@@ -52,7 +52,7 @@ Check.Correct.Model <- function(input.model, target.model){
 
 Create.FMA <- function(w, name, allMods) {
   assign(name, list(w = as.numeric(w), coefs = as.numeric(allMods$coefficients %*% w),
-                    preds = as.numeric(allMods$preds %*% w)), env = .GlobalEnv)
+                    preds = as.numeric(allMods$preds %*% w)), envir = .GlobalEnv)
 }
 
 Wrapper.Glmnet <- function(alphaval, penalty.weights, methodname, include.intercept = Include.Intercept,
