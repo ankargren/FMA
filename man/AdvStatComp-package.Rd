@@ -32,6 +32,3 @@ Maintainer: Sebastian Andersson <sebastian.andersson@statistik.uu.se>
 ~~ Optional links to other man pages, e.g. ~~
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
-\examples{
-%% ~~ simple examples of the most important functions ~~
-}

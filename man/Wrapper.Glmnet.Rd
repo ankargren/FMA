@@ -5,8 +5,9 @@
   Wrapper for \code{\link{glmnet}}.
 }
 \usage{
-Wrapper.Glmnet(alphaval, penalty.weights, methodname, include.intercept = Include.Intercept,
-                           ry = Ry, rxz = Rxz, col.index = Col.Index, new.OBS = New.OBS, new.Ry = New.Ry)
+Wrapper.Glmnet(alphaval, penalty.weights, methodname, 
+include.intercept = Include.Intercept, ry = Ry, rxz = Rxz, col.index = Col.Index, 
+new.OBS = New.OBS, new.Ry = New.Ry)
 }
 \arguments{
   \item{alphaval}{Value for alpha in glmnet.}

@@ -12,5 +12,6 @@ Population.Parameters(J.X, J.Z, Cov.Const, Var.Const, Include.Intercept)
   \item{J.Z}{Number of Zs.}
   \item{Cov.Const}{A constant which is used in the correlation matrix. At most, the correlation is this number.}
   \item{Var.Const}{The variance of the independent variables.}
+  \item{Include.Intercept}{If intercept is included.}
 }
 \keyword{Population.Parameters}
