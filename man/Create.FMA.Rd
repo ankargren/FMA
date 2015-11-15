@@ -5,11 +5,11 @@
   Create list for frequensti model averaging estimators.
 }
 \usage{
-Create.FMA(w, name, allModels)
+Create.FMA(w, name, allMods)
 }
 \arguments{
   \item{w}{The weight vector.}
   \item{name}{The name of the method.}
-  \item{allModels}{The resulting list from \link{\code{EstAllModels}}.}
+  \item{allMods}{The resulting list from \code{\link{EstAllModels}}.}
 }
 \keyword{Create.FMA}

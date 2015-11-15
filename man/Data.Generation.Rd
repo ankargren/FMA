@@ -17,5 +17,6 @@ new.samplesize)
   \item{col.index}{The column index.}
   \item{j.x}{The number of Xs.}
   \item{j.z}{The number of Zs.}
+  \item{new.samplesize}{The size of the evaluation sample.}
 }
 \keyword{Data.Generation}
