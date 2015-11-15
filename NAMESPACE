@@ -1,0 +1,4 @@
+useDynLib(AdvStatComp)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+import(RcppArmadillo)
