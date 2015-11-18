@@ -1,12 +1,26 @@
-Generate.S <- cmpfun(function(Fix.X, Fix.Z, Potential.X, Potential.Z) {
+Generate.S <- cmpfun(function(Fix.X, Fix.Z, Potential.X, Potential.Z, avertype = "all") {
+  if (!(avertype %in% c("all", "nested", "singleton"))) {
+    stop("Need to specify the type of submodels to average over.")
+  }
+
   n.variables <- length(c(Fix.X, Fix.Z, Potential.X, Potential.Z))
-  n.submodels <- 2^length(c(Potential.X, Potential.Z))
+  if (avertype == "all") {
+    n.submodels <- 2^length(c(Potential.X, Potential.Z))
+  } else {
+    n.submodels <- length(c(Potential.X, Potential.Z))
+  }
   n.potential <- length(c(Potential.X, Potential.Z))
   n.X <- length(c(Fix.X, Potential.X))
   n.Z <- length(c(Fix.Z, Potential.Z))
   s <- matrix(NaN, nrow = n.submodels, ncol = n.variables)
   s[, c(Fix.X, n.X+Fix.Z)] <- 1
-  s[, c(Potential.X, n.X+Potential.Z)] <- as.matrix(expand.grid(rep(list(c(0,1)), n.potential)))
+  if (avertype == "all") {
+    s[, c(Potential.X, n.X+Potential.Z)] <- as.matrix(expand.grid(rep(list(c(0,1)), n.potential)))
+  } else if (avertype == "nested") {
+    s[, c(Potential.X, n.X+Potential.Z)] <- lower.tri(diag(n.potential), 1)*1
+  } else {
+    s[, c(Potential.X, n.X+Potential.Z)] <- diag(n.potential)
+  }
   s
 })
 
