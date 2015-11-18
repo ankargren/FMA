@@ -1,4 +1,4 @@
-FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.intercept == 1) {
+FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.intercept = 1) {
   if (missing(weighting.method) == TRUE) {
     stop("Need to specify the method to use for weighting.")
   }
