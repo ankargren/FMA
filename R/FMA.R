@@ -17,7 +17,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
       y <- as.matrix(y)
     }
     
-    if (submodels %in% c("all", "nested", "singleton")) {
+    if (is.character(submodels) && submodels %in% c("all", "nested", "singleton")) {
       Fix.Z <- NULL
       Potential.Z <- NULL
       if ((include.intercept == 1) || all(X[, 1] == 1)) {
