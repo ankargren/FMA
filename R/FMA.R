@@ -52,14 +52,30 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
     if (predictflag == 0) {
       Xnew <- matrix(0, 1, ncol(allMods$s))
     }
-    allMods <- EstAllMods(X, Xnew, y, submodels)
+    allMods <- EstAllModels(X, Xnew, y, s)
   }
   
   if (weighting.method %in% c("MMA", "JMA")) {
+    M <- nrow(s)
+    if (weighting.method == "MMA") {
+      cc <- allMods$SEs[M] * allMods$K
+      HH <- crossprod(allMods$etilde)
+    } else {
+      cc <- matrix(0, nrow = M, ncol = 1)
+      HH <- crossprod(allMods$eJMA)
+    }
     
+    QP <- ipop(c = cc, H = HH, A = rep(1, M), b = 1,
+                   l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
   }
   
   if (weighting.method %in% c("AIC", "BIC")) {
-    
+    if (weighting.method == "AIC") {
+      ICvec <- allModels$AIC
+    } else {
+      ICvec <- allModels$BIC
+    }
+    maxmod <- max(ICvec)
+    ICw <- exp(-1/2*(ICvec-maxmod))/sum(exp(-1/2*(ICvec-maxmod)))
   }
 }
