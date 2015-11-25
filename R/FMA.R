@@ -67,6 +67,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
     
     QP <- ipop(c = cc, H = HH, A = rep(1, M), b = 1,
                    l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
+    ICw <- primal(QP)
   }
   
   if (weighting.method %in% c("AIC", "BIC")) {
@@ -78,4 +79,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
     maxmod <- max(ICvec)
     ICw <- exp(-1/2*(ICvec-maxmod))/sum(exp(-1/2*(ICvec-maxmod)))
   }
+  
+  ICw
+  
 }
