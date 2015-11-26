@@ -50,7 +50,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
   
   if (estimateflag == 1) {
     if (predictflag == 0) {
-      Xnew <- matrix(0, 1, ncol(allMods$s))
+      Xnew <- matrix(0, 1, ncol(s))
     }
     allMods <- EstAllModels(X, Xnew, y, s)
   }
