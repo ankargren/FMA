@@ -1,4 +1,4 @@
-FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.intercept = 1) {
+FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 1) {
   if (missing(weighting.method) == TRUE) {
     stop("Need to specify the method to use for weighting.")
   }
@@ -27,7 +27,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
         Fix.X <- NULL
         Potential.X <- 1:ncol(X)
       }
-      s <- Generate.S(Fix.X, Fix.Z, Potential.X, Potential.Z, avertype = "submodels")
+      s <- Generate.S(Fix.X, Fix.Z, Potential.X, Potential.Z, avertype = submodels)
     }
     
     if (is.matrix(submodels) && !(dim(submodels)[2] == dim(X)[2])) {
@@ -37,21 +37,15 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
     }
   } else {
     estimateflag <- 0
+    s <- allMods$s
   }
-  if (missing(Xnew) == TRUE) {
-    predictflag <- 1
-  } else {
-    predictflag <- 0
-  }
-  
+
   if (!(weighting.method %in% c("AIC", "BIC", "JMA", "MMA"))) {
     stop("The weighting method is incorrectly specified.")
   }
   
   if (estimateflag == 1) {
-    if (predictflag == 0) {
-      Xnew <- matrix(0, 1, ncol(s))
-    }
+    Xnew <- matrix(0, 1, ncol(s))
     allMods <- EstAllModels(X, Xnew, y, s)
   }
   
@@ -72,14 +66,14 @@ FMA <- function(weighting.method, allMods, X, y, submodels, Xnew, include.interc
   
   if (weighting.method %in% c("AIC", "BIC")) {
     if (weighting.method == "AIC") {
-      ICvec <- allModels$AIC
+      ICvec <- allMods$AIC
     } else {
-      ICvec <- allModels$BIC
+      ICvec <- allMods$BIC
     }
     maxmod <- max(ICvec)
     ICw <- exp(-1/2*(ICvec-maxmod))/sum(exp(-1/2*(ICvec-maxmod)))
   }
   
-  ICw
+  as.numeric(ICw)
   
 }

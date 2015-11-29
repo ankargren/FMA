@@ -59,6 +59,6 @@ List EstAllModels(arma::mat X, arma::mat Xnew, arma::mat y, arma::mat s) {
                             Rcpp::Named("coefficients") = output, Rcpp::Named("K") = K,
                             Rcpp::Named("etilde") = etilde, Rcpp::Named("eJMA") = eJMA,
                             Rcpp::Named("AIC") = AIC, Rcpp::Named("BIC") = BIC,
-                            Rcpp::Named("preds") = preds, Rcpp::Named("s"));
+                            Rcpp::Named("preds") = preds, Rcpp::Named("s") = s);
 }
 

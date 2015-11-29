@@ -139,44 +139,21 @@ Sim.Iter <- function(estimators = Estimators, samplesize = SampleSize, covarianc
     OBS.X <- OBS[, -1]
   }
   
-  allModels <- EstAllModels(as.matrix(OBS.X), as.matrix(cbind(1, New.OBS)), as.matrix(OBS.y), s.matrix)
+  allModels <- EstAllModels(X = as.matrix(OBS.X), Xnew = as.matrix(cbind(1, New.OBS)), y = as.matrix(OBS.y), s = s.matrix)
   
   ## COMPUTE WEIGHTS FOR ALL METHODS
-  # Start with AIC and BIC
-  AICvec <- allModels$AIC
-  AICw   <- exp(-1/2*(AICvec-AICvec[1]))/sum(exp(-1/2*(AICvec-AICvec[1])))
-  BICvec <- allModels$BIC
-  BICw   <- exp(-1/2*(BICvec-BICvec[1]))/sum(exp(-1/2*(BICvec-BICvec[1])))
+  AICw <- FMA(weighting.method = "AIC", allModels = allMods)
+  BICw <- FMA(weighting.method = "BIC", allModels = allMods)
+  JMAw <- FMA(weighting.method = "JMA", allModels = allMods)
+  MMAw <- FMA(weighting.method = "MMA", allModels = allMods)
   
-  # JMA and MMA
-  # QP: minimize c'*w + 1/2 * w' * H * w
-  # s.t. b <= A * w <= b + r
-  # l <= x <= u
-  M <- nrow(s.matrix)
-  c.JMA <- matrix(0, nrow = M, ncol = 1)
-  c.MMA <- allModels$SEs[M] * allModels$K
-  H.JMA <- crossprod(allModels$eJMA)
-  H.MMA <- crossprod(allModels$etilde)
-  
-  # Get the weights using quadratic programming
-  QP.JMA <- ipop(c = c.JMA, H = H.JMA, A = rep(1, M), b = 1,
-                 l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
-  QP.MMA <- ipop(c = c.MMA, H = H.MMA, A = rep(1, M), b = 1,
-                 l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
-  QP.JMA2 <- ipop(c = c.JMA, H = H.JMA + diag(M)*1e-10, A = rep(1, M), b = 1,
-                  l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
-  QP.MMA2 <- ipop(c = c.MMA, H = H.MMA + diag(M)*1e-10, A = rep(1, M), b = 1,
-                  l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
-  
-  # Create the FMA objects
+  ## COMPUTE PREDICTIONS
   Create.FMA(AICw, "AICmod", allModels)
   Create.FMA(BICw, "BICmod", allModels)
-  Create.FMA(primal(QP.JMA), "JMAmod", allModels)
-  Create.FMA(primal(QP.MMA), "MMAmod", allModels)
-  Create.FMA(primal(QP.JMA2), "JMAmod2", allModels)
-  Create.FMA(primal(QP.MMA2), "MMAmod2", allModels)
+  Create.FMA(JMAw, "JMAmod", allModels)
+  Create.FMA(MMAw, "MMAmod", allModels)
   
-  ## PREDICT
+  ## COMPUTE BIAS AND MSE
   Results["SmoothAIC", "Bias"] <- mean(AICmod$preds - New.Ry)
   Results["SmoothAIC", "MSE"]  <- mean((AICmod$preds - New.Ry)^2)
   Results["SmoothBIC", "Bias"] <- mean(BICmod$preds - New.Ry)
@@ -185,10 +162,6 @@ Sim.Iter <- function(estimators = Estimators, samplesize = SampleSize, covarianc
   Results["JMA", "MSE"]  <- mean((JMAmod$preds - New.Ry)^2)
   Results["MMA", "Bias"] <- mean(MMAmod$preds - New.Ry)
   Results["MMA", "MSE"]  <- mean((MMAmod$preds - New.Ry)^2)
-  Results["JMA2", "Bias"] <- mean(JMAmod2$preds - New.Ry)
-  Results["JMA2", "MSE"]  <- mean((JMAmod2$preds - New.Ry)^2)
-  Results["MMA2", "Bias"] <- mean(MMAmod2$preds - New.Ry)
-  Results["MMA2", "MSE"]  <- mean((MMAmod2$preds - New.Ry)^2)
   
   #### Ideal case where we know which regressors are important
   ######## Only meaningful when only finite number of regressors are used in the DGP. Not always valid!!
