@@ -18,8 +18,6 @@ FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 
     }
     
     if (is.character(submodels) && submodels %in% c("all", "nested", "singleton")) {
-      Fix.Z <- NULL
-      Potential.Z <- NULL
       if ((include.intercept == 1) || all(X[, 1] == 1)) {
         Fix.X <- 1
         Potential.X <- 2:ncol(X)
@@ -27,7 +25,7 @@ FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 
         Fix.X <- NULL
         Potential.X <- 1:ncol(X)
       }
-      s <- Generate.S(Fix.X, Fix.Z, Potential.X, Potential.Z, avertype = submodels)
+      s <- Generate.S(Fix.X, Potential.X, avertype = submodels)
     }
     
     if (is.matrix(submodels) && !(dim(submodels)[2] == dim(X)[2])) {
