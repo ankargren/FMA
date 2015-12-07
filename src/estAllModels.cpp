@@ -50,8 +50,8 @@ List EstAllModels(arma::mat X, arma::mat Xnew, arma::mat y, arma::mat s) {
     double ncoef = idmatsub.n_cols;
     K[ii] = ncoef;
     SEs[ii] = sum(trans(residuals) * residuals)/(n - ncoef);
-    AIC[ii] = n * log(SEs[ii]) + 2*ncoef;
-    BIC[ii] = n * log(SEs[ii]) + log(n)*ncoef;
+    AIC[ii] = n * log((n - ncoef)/n*SEs[ii]) + 2*ncoef;
+    BIC[ii] = n * log((n - ncoef)/n*SEs[ii]) + log(n)*ncoef;
   }
 
   // Return a list
