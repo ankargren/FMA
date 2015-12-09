@@ -28,14 +28,17 @@ FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 
       s <- Generate.S(Fix.X, Potential.X, avertype = submodels)
     }
     
-    if (is.matrix(submodels) && !(dim(submodels)[2] == dim(X)[2])) {
+    if (is.matrix(submodels) == TRUE) {
+      if (!(dim(submodels)[2] == dim(X)[2])) {
       stop("Dimensions of the submodel matrix are wrong.")
     } else {
       s <- submodels
+      M <- nrow(s)
+    }
     }
   } else {
     estimateflag <- 0
-    s <- allMods$s
+    M <- length(allMods$AIC)
   }
 
   if (!(weighting.method %in% c("AIC", "BIC", "JMA", "MMA"))) {
@@ -43,12 +46,11 @@ FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 
   }
   
   if (estimateflag == 1) {
-    Xnew <- matrix(0, 1, ncol(s))
+    Xnew <- matrix(0, 1, ncol(X))
     allMods <- EstAllModels(X, Xnew, y, s)
   }
   
   if (weighting.method %in% c("MMA", "JMA")) {
-    M <- nrow(s)
     if (weighting.method == "MMA") {
       cc <- allMods$SEs[M] * allMods$K
       HH <- crossprod(allMods$etilde)
