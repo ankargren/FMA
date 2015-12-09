@@ -9,4 +9,4 @@ Description: This package contains the necessary functions for doing the simulat
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.1), RcppArmadillo (>= 0.6.200.2.0)
 LinkingTo: Rcpp, RcppArmadillo
-Depends: RcppArmadillo, Rcpp, kernlab
+Depends: RcppArmadillo, Rcpp, kernlab, VGAM

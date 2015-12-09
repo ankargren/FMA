@@ -30,7 +30,7 @@ Returns a list with the following:
 \examples{
 ## Generate some data
 Xdata <- matrix(rnorm(100), 25, 4)
-ydata <- rowSums(Xdata) + rnorm(25)
+ydata <- matrix(rowSums(Xdata) + rnorm(25), 25, 1)
 Xnewdata <- matrix(rnorm(100), 25, 4)
 
 ## Get the submodel matrix

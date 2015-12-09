@@ -21,7 +21,7 @@ Returns a list with the following:
 }
 \examples{
 ## Generate data as in Hansen:
-\notrun{data <- Hansen(alpha = 0.5, n = 50, r2 = 0.5, J = 1000)}
+\dontrun{data <- Hansen(alpha = 0.5, n = 50, r2 = 0.5, J = 1000)}
 }
 \references{
 Hansen, Bruce (2007) Least Squares Model Averaging, Econometrica, 75(4):1175-1189.
