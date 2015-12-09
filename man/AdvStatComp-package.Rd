@@ -23,7 +23,7 @@ Sebastian Andersson
 Maintainer: Sebastian Andersson <sebastian.andersson@statistik.uu.se>
 }
 \references{
-
+Hansen, Bruce (2007) Least Squares Model Averaging, Econometrica, 75(4):1175-1189.
 }
 
 \keyword{ package }

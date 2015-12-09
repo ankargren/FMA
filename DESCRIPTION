@@ -7,6 +7,5 @@ Author: Sebastian Andersson
 Maintainer: Sebastian Andersson <sebastian.andersson@statistik.uu.se>
 Description: This package contains the necessary functions for doing the simulation study I chose to do for the course project for Advanced Statistical Computing. It is a comparison of prediction performance between a class of penalized estimators (Lasso, Ridge, Elastic net, etc) and model averaging estimators (smooth AIC, smooth BIC, Jackknife model averaging and Mallow's model averaging).
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.1), RcppArmadillo (>= 0.6.200.2.0)
+Imports: Rcpp (>= 0.12.1), RcppArmadillo (>= 0.6.200.2.0), kernlab, VGAM, glmnet
 LinkingTo: Rcpp, RcppArmadillo
-Depends: RcppArmadillo, Rcpp, kernlab, VGAM, glmnet
