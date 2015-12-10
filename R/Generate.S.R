@@ -16,11 +16,14 @@ Generate.S <- function(Fix.X, Potential.X, avertype = "all") {
   } 
   
   if (avertype == "all") {
-    s[, Potential.X] <- as.matrix(expand.grid(rep(list(c(0,1)), Potential.X)))
+    s[, (1+Fix.X):(Fix.X + Potential.X)] <- as.matrix(expand.grid(rep(list(c(0,1)), Potential.X)))
   } else if (avertype == "nested") {
     s[ifelse(Fix.X > 0, 2, 1):nrow(s), (1 + Fix.X):n.variables] <- lower.tri(diag(Potential.X), 1)*1
   } else {
     s[ifelse(Fix.X > 0, 2, 1):nrow(s), (1 + Fix.X):n.variables] <- diag(Potential.X)
   }
-  s
+  if (any(rowSums(s) == 0)) {
+    s <- s[-which(rowSums(s) == 0), ]
+  }
+  return(s)
 }
