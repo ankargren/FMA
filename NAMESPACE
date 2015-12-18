@@ -1,7 +1,6 @@
 useDynLib(AdvStatComp)
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
-import(RcppArmadillo)
 importFrom(LowRankQP, LowRankQP)
 importFrom(VGAM, zeta)
 importFrom(glmnet, cv.glmnet)
