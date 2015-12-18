@@ -53,15 +53,15 @@ FMA <- function(weighting.method, allMods, X, y, submodels, include.intercept = 
   if (weighting.method %in% c("MMA", "JMA")) {
     if (weighting.method == "MMA") {
       cc <- allMods$SEs[M] * allMods$K
-      HH <- crossprod(allMods$etilde)
-    } else {
+      HH <- t(allMods$etilde)
+    }
+    else {
       cc <- matrix(0, nrow = M, ncol = 1)
-      HH <- crossprod(allMods$eJMA)
+      HH <- t(allMods$eJMA)
     }
     
-    QP <- ipop(c = cc, H = HH, A = rep(1, M), b = 1,
-                   l = rep(0, M), u = rep(1, M), r = 0, maxiter = 100)
-    ICw <- primal(QP)
+    QP <- LowRankQP(Vmat = HH, dvec = cc, Amat = matrix(1, 1, M), bvec = 1, uvec = rep(1, M))
+    ICw <- QP$alpha
   }
   
   if (weighting.method %in% c("AIC", "BIC")) {
