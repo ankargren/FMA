@@ -1,4 +1,4 @@
-FMA2 <- function (weighting.method, allMods, X, y, submodels, include.intercept = 1, solver = "solve.QP") 
+FMA <- function (weighting.method, allMods, X, y, submodels, include.intercept = 1, solver = "solve.QP") 
 {
   if (missing(weighting.method) == TRUE) {
     stop("Need to specify the method to use for weighting.")

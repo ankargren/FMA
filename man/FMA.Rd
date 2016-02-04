@@ -5,7 +5,8 @@
   Frequentist model averaging using smoothed AIC, smoothed BIC, Mallow's model averaging or Jackknife model averaging.
 }
 \usage{
-FMA(weighting.method, allMods, X, y, submodels, include.intercept = 1, solver = "solve.QP")
+FMA(weighting.method, allMods, X, y, submodels, 
+    include.intercept = 1, solver = "solve.QP")
 }
 \arguments{
   \item{weighting.method}{One of \code{"AIC"} (for smoothed AIC), \code{"BIC"} (for smoothed BIC), \code{"MMA"} (for Mallow's model averaging) and \code{"JMA"} (for Jackknife model averaging).}
@@ -24,12 +25,15 @@ FMA(weighting.method, allMods, X, y, submodels, include.intercept = 1, solver = 
 }
 \examples{
 ## First alternative: supply allMods
-\dontrun{myAllMods <- EstAllModels(X = Xdata, Xnew = Xnewdata, y = ydata, s = smatrix)}
+\dontrun{myAllMods <- EstAllModels(X = Xdata, 
+         Xnew = Xnewdata, y = ydata, s = smatrix)}
 \dontrun{wAIC <- FMA("AIC", allMods = myAllMods)}
 \dontrun{wJMA <- FMA("JMA", allMods = myAllMods)}
 
 ## Second alternative: let the function call EstAllModels
-\dontrun{wAIC <- FMA("AIC", X = Xdata, Xnew = Xnewdata, y = ydata, submodels = "nested")}
-\dontrun{wJMA <- FMA("JMA", X = Xdata, Xnew = Xnewdata, y = ydata, submodels = "nested")}
+\dontrun{wAIC <- FMA("AIC", X = Xdata, 
+         Xnew = Xnewdata, y = ydata, submodels = "nested")}
+\dontrun{wJMA <- FMA("JMA", X = Xdata, 
+         Xnew = Xnewdata, y = ydata, submodels = "nested")}
 }
 \keyword{FMA}
