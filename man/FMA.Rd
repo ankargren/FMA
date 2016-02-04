@@ -5,7 +5,7 @@
   Frequentist model averaging using smoothed AIC, smoothed BIC, Mallow's model averaging or Jackknife model averaging.
 }
 \usage{
-FMA(weighting.method, allMods, X, y, submodels, include.intercept = 1)
+FMA(weighting.method, allMods, X, y, submodels, include.intercept = 1, solver = "solve.QP")
 }
 \arguments{
   \item{weighting.method}{One of \code{"AIC"} (for smoothed AIC), \code{"BIC"} (for smoothed BIC), \code{"MMA"} (for Mallow's model averaging) and \code{"JMA"} (for Jackknife model averaging).}
@@ -14,12 +14,13 @@ FMA(weighting.method, allMods, X, y, submodels, include.intercept = 1)
   \item{y}{Vector of the dependent variable.}
   \item{submodels}{Either one of \code{"all"}, \code{"singleton"} or \code{"nested"} (which is then passed to \code{Generate.S}), or a custom selection matrix (of appropriate size).}
   \item{include.intercept}{Flag for inclusion of intercept. Default is 1 for inclusion.}
+  \item{solver}{The solver to use for quadratic programming. One of \code{"solve.QP"} (the default, uses \code{\link{solve.QP}}), \code{"ipop"} (uses \code{\link{ipop}}) and \code{"LowRankQP"} (uses \code{\link{LowRankQP}}).}
 }
 \details{Either one must supply the function with the \code{allMods} argument, or the raw data and what models to average over. If one gives the function \code{allMods}, then only the weighting.method needs to be specified. If \code{allMods} is not supplied, then one must give the function the raw data and the selection matrix so that it can call \code{EstAllModels}. The first alternative is to be preferred if one will use multiple averaging techniques for the same data. See the examples.}
 \value{Returns a vector with the weights.}
 \seealso{
   \code{\link{EstAllModels}},
-    \code{\link{Generate.S}}.
+    \code{\link{Generate.S}}, \code{\link{solve.QP}}, \code{\link{ipop}}, \code{\link{LowRankQP}}.
 }
 \examples{
 ## First alternative: supply allMods
