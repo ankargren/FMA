@@ -83,9 +83,9 @@ FMA <- function (weighting.method, allMods, X, y, submodels, include.intercept =
     else {
       ICvec <- allMods$BIC
     }
-    maxmod <- max(ICvec)
-    ICw <- exp(-1/2 * (ICvec - maxmod))/sum(exp(-1/2 * (ICvec - 
-                                                          maxmod)))
+    scalemod <- median(ICvec)
+    ICw <- exp(-1/2 * (ICvec - scalemod))/sum(exp(-1/2 * (ICvec - 
+                                                          scalemod)))
   }
   as.numeric(ICw)
 }
