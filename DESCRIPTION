@@ -1,11 +1,11 @@
-Package: AdvStatComp
+Package: FMA
 Type: Package
-Title: Project for AdvStatComp (simulation study)
-Version: 1.0
-Date: 2015-11-14
+Title: Frequentist Model Averaging
+Version: 0.1
+Date: 2016-02-15
 Author: Sebastian Andersson
 Maintainer: Sebastian Andersson <sebastian.andersson@statistik.uu.se>
-Description: This package contains the necessary functions for doing the simulation study I chose to do for the course project for Advanced Statistical Computing. It is a comparison of prediction performance between a class of penalized estimators (Lasso, Ridge, Elastic net, etc) and model averaging estimators (smooth AIC, smooth BIC, Jackknife model averaging and Mallow's model averaging).
+Description: This package contains functions for applying frequentist model averaging for linear regression.
 License: GPL (>= 2)
 Imports: LowRankQP, VGAM, glmnet, quadprog, kernlab
 LinkingTo: Rcpp, RcppArmadillo

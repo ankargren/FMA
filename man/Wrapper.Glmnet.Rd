@@ -5,7 +5,8 @@
   This function is a wrapper for choosing the bandwidth in glmnet and then predicting using this choice.
 }
 \usage{
-Wrapper.Glmnet(alphaval, Xdata, ydata, Xnewdata, mu) 
+Wrapper.Glmnet(alphaval, Xdata, ydata, Xnewdata, mu,
+               prediction = TRUE, include.intercept = 1) 
 }
 \arguments{
   \item{alphaval}{The choice of \code{alpha} in \code{\link{glmnet}}. 0 corresponds to the Lasso, 1 to ridge.}
@@ -13,6 +14,8 @@ Wrapper.Glmnet(alphaval, Xdata, ydata, Xnewdata, mu)
   \item{ydata}{The response vector.}
   \item{Xnewdata}{The data to use for prediction.}
   \item{mu}{The true mean vector to use for computing MSE of predictions.}
+  \item{prediction}{If predictions should be evaluated (and not beta).}
+  \item{include.intercept}{If intercept.}
 }
 \value{
 Returns a scalar value with the MSE of the prediction of the mean vector. 

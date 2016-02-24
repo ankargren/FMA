@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // EstAllModels
 List EstAllModels(arma::mat X, arma::mat Xnew, arma::mat y, arma::mat s);
-RcppExport SEXP AdvStatComp_EstAllModels(SEXP XSEXP, SEXP XnewSEXP, SEXP ySEXP, SEXP sSEXP) {
+RcppExport SEXP FMA_EstAllModels(SEXP XSEXP, SEXP XnewSEXP, SEXP ySEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;

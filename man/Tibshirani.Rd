@@ -5,11 +5,12 @@
   Data generation corresponding to the four simulation setups used by Tibshirani (1996).
 }
 \usage{
-Tibshirani(samplesize, ex)
+Tibshirani(samplesize, ex, equi = FALSE)
 }
 \arguments{
   \item{samplesize}{The sample size.}
   \item{ex}{The example to generate data according to. Can be 1, 2, 3 or 4.}
+  \item{equi}{True or false to indicate if equicorrelations should be used.}
 }
 \value{
 Returns a list with the following:

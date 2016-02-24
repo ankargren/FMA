@@ -1,11 +1,11 @@
 \name{LeebPoetscher}
 \alias{LeebPoetscher}
-\title{Generate data as in Leeb and Pötscher (2006)}
+\title{Generate data as in Leeb and Poetscher (2006)}
 \description{
-  Data generation corresponding to Setups I-III by Leeb and Pötscher (2006).
+  Data generation corresponding to Setups I-III by Leeb and Poetscher (2006).
 }
 \usage{
-LeebPoetscher(samplesize, gam, eta, setup)
+LeebPoetscher(samplesize, gam, setup)
 }
 \arguments{
   \item{samplesize}{The sample size.}

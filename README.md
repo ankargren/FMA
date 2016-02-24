@@ -1,2 +1,2 @@
-# AdvStatComp
-Package for Advanced statistical computing project
+# FMA
+Package for performing frequentist model averaging

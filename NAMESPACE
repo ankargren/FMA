@@ -1,4 +1,4 @@
-useDynLib(AdvStatComp)
+useDynLib(FMA)
 exportPattern("^[[:alpha:]]+")
 import(RcppArmadillo)
 importFrom(Rcpp, evalCpp)
