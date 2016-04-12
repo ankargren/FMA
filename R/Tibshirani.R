@@ -14,8 +14,8 @@ Tibshirani <- function(samplesize, ex, equi = FALSE) {
       sigma <- 2
     } 
     
-    if (equi == TRUE) {
-      XCov <- matrix(0.5, 8, 8)
+    if (equi != FALSE) {
+      XCov <- matrix(equi, 8, 8) + diag(1 - equi, 8)
     } else {
       XCov <- outer(1:8, 1:8, function(x, y) 0.5^(abs(x-y)))
     }

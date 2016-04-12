@@ -7,6 +7,6 @@ Author: Sebastian Andersson
 Maintainer: Sebastian Andersson <sebastian.andersson@statistik.uu.se>
 Description: This package contains functions for applying frequentist model averaging for linear regression.
 License: GPL (>= 2)
-Imports: LowRankQP, VGAM, glmnet, quadprog, kernlab
+Imports: LowRankQP, VGAM, glmnet, quadprog, kernlab, mvnfast, copula
 LinkingTo: Rcpp, RcppArmadillo
 Depends: RcppArmadillo, Rcpp
