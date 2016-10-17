@@ -1,4 +1,4 @@
-Tibshirani <- function(samplesize, ex, equi = FALSE, R2 = NULL) {
+Tibshirani <- function(samplesize, ex, equi = FALSE, R2 = NULL, rho = 0.5) {
   simData <- list(X = NULL, y = NULL, mu = NULL)
   if (ex %in% 1:3) {
     if (ex == 1) {
@@ -17,7 +17,7 @@ Tibshirani <- function(samplesize, ex, equi = FALSE, R2 = NULL) {
     if (equi != FALSE) {
       XCov <- matrix(equi, 8, 8) + diag(1 - equi, 8)
     } else {
-      XCov <- outer(1:8, 1:8, function(x, y) 0.5^(abs(x-y)))
+      XCov <- outer(1:8, 1:8, function(x, y) rho^(abs(x-y)))
     }
 
     simData$X <- matrix(rnorm(samplesize * 8), ncol = 8) %*% t(chol(XCov))
