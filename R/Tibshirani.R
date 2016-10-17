@@ -1,4 +1,4 @@
-Tibshirani <- function(samplesize, ex, equi = FALSE) {
+Tibshirani <- function(samplesize, ex, equi = FALSE, R2 = NULL) {
   simData <- list(X = NULL, y = NULL, mu = NULL)
   if (ex %in% 1:3) {
     if (ex == 1) {
@@ -29,6 +29,14 @@ Tibshirani <- function(samplesize, ex, equi = FALSE) {
     Beta <- c(rep(0, 10), rep(2, 10), rep(0, 10), rep(2, 10))
     simData$mu <- simData$X %*% Beta
     sigma <- 15
+  }
+  
+  if (is.null(R2) == FALSE) {
+    if (equi == FALSE) {
+      sigma <- sqrt((sum(Beta^2) + 2*sum((7:1)*rho^(1:7)))*(1 - R2)/R2)
+    } else {
+      sigma <- sqrt((sum(Beta^2) + 2*rho*7*4*(1 - R2)/R2))
+    }
   }
   
   simData$y <- simData$mu + rnorm(samplesize, mean = 0, sd = sigma)
